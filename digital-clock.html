@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .clock {
+            font-size: 24px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Current Time</h1>
+    <div class="clock">
+        <div id="utc" class="time"></div>
+        <div id="pst" class="time"></div>
+        <div id="est" class="time"></div>
+    </div>
+    <script>
+        function updateClocks() {
+            const now = new Date();
+            const utc = now.toUTCString();
+            const pst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })).toLocaleString();
+            const est = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' })).toLocaleString();
+            document.getElementById('utc').innerText = 'UTC: ' + utc;
+            document.getElementById('pst').innerText = 'PST: ' + pst;
+            document.getElementById('est').innerText = 'EST: ' + est;
+        }
+
+        updateClocks();
+        setInterval(updateClocks, 1000);
+    </script>
+</body>
+</html>
